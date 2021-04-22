@@ -2,3 +2,8 @@ language: go
 
 go:
   - 1.15.x
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
