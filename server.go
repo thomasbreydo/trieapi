@@ -9,7 +9,6 @@ import (
 	"sync"
 
 	"github.com/gorilla/mux"
-
 	"github.com/thomasbreydo/trieapi/tries"
 )
 
@@ -51,9 +50,9 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 		word = ""
 	}
 	mutex.Lock()
-	modified := trie.Add(word)
+	add := trie.Add(word)
 	mutex.Unlock()
-	if modified {
+	if add {
 		_, err := fmt.Fprintf(w, "Keyword (%s) added", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -74,9 +73,9 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 		word = ""
 	}
 	mutex.Lock()
-	deleted := trie.Delete(word)
+	del := trie.Delete(word)
 	mutex.Unlock()
-	if deleted {
+	if del {
 		_, err := fmt.Fprintf(w, "Keyword (%s) deleted", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
