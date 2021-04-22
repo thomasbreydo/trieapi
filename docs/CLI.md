@@ -74,8 +74,8 @@ To search if a keyword is present in the trie, use `search`:
 trie search "<keyword>"
 ```
 
-If the keyword is in the trie, the CLI outputs `Found`. Otherwise, 
-it outputs `Not found`.
+If the keyword is in the trie, the CLI outputs `Keyword (<keyword>) found`. Otherwise, 
+it outputs `Keyword (<keyword>) not found`.
 
 ### Complete
 
