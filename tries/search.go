@@ -13,7 +13,7 @@ func rootOfPrefix(prefix string, root *Node) *Node {
 	return cur
 }
 
-// Search checks if a string is in a trie.
+// Search checks if a word is in a trie.
 func (root *Node) Search(word string) bool {
 	prefixRoot := rootOfPrefix(word, root)
 	if prefixRoot == nil {

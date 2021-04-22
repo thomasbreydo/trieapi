@@ -1,6 +1,6 @@
 package tries
 
-import "testing"
+ima keyword "testing"
 
 func TestClear(t *testing.T) {
 	trie := New()

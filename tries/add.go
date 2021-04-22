@@ -5,19 +5,19 @@ func (root *Node) Add(word string) bool {
 	cur := root
 	var next *Node
 	var found bool
-	modified := false
+	mod := false
 	for _, r := range word {
 		next, found = cur.children[r]
 		if !found {
 			next = New()
 			cur.children[r] = next
-			modified = true
+			mod = true
 		}
 		cur = next
 	}
 	if !cur.term {
-		modified = true
+		mod = true
 	}
 	cur.term = true
-	return modified
+	return mod
 }
