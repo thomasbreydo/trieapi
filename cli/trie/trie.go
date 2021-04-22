@@ -4,7 +4,7 @@ package main
 import (
 	"os"
 
-	"github.com/thomasbreydo/trieapi/cli/cmd"
+	"github.com/thomasbreydo/trieapi/cli/trie/cmd"
 
 	"github.com/spf13/cobra"
 )

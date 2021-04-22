@@ -4,8 +4,9 @@ import (
 	"errors"
 	"fmt"
 
+	api2 "github.com/thomasbreydo/trieapi/cli/trie/cmd/api"
+
 	"github.com/spf13/cobra"
-	"github.com/thomasbreydo/trieapi/cli/cmd/api"
 )
 
 var word string
@@ -18,7 +19,7 @@ var Add = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("add", word)
+		res, code, err := api2.WithWord("add", word)
 		if err != nil {
 			return err
 		}

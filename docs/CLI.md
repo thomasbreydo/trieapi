@@ -25,7 +25,7 @@ Prerequisites:
 To install the CLI, run the following:
 
 ```text
-go get -u github.com/thomasbreydo/trieapi/cli/trie
+go get -u https://github.com/thomasbreydo/trieapi/cli/trie
 ```
 
 ## Usage
