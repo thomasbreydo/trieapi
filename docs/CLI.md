@@ -4,7 +4,7 @@ The trie system comes with a command-line interface that can:
 
 1. [Add a keyword to the trie](#add)
 
-2. [Delete keywords from the trie](#delete)
+2. [Delete a keyword from the trie](#delete)
 
 3. [Search for a keyword in trie](#search)
 
@@ -34,7 +34,7 @@ You can use the CLI to do any of the following:
 
 1. [Add a keyword to the trie](#add)
 
-2. [Delete keywords from the trie](#delete)
+2. [Delete a keyword from the trie](#delete)
 
 3. [Search for a keyword in trie](#search)
 
@@ -43,6 +43,8 @@ You can use the CLI to do any of the following:
 5. [Display the trie](#display)
 
 6. [Clear the trie](#clear)
+
+At any time, run `trie help` or `trie help <command>` to show usage info.
 
 ### Add
 
@@ -100,13 +102,13 @@ it outputs `Keyword (<keyword>) not found`.
 To get all keywords in the trie that start with a prefix, use `complete`:
 
 ```text
-trie complete --word <prefix>
+trie complete --prefix <prefix>
 ```
 
 or
 
 ```text
-trie complete -w <prefix>
+trie complete -p <prefix>
 ```
 
 The CLI outputs a newline-separated list of keywords.
@@ -120,29 +122,9 @@ To display the trie, use `display`:
 ```text
 trie display
 ```
+The CLI will output a newline-separated list of all words in the tree. _Note: If
+the empty string is in the trie, the first line will be blank._
 
-For example, here is what a trie with the keywords `app, apple, amazon, amazing, already, fix, find` might look like:
-```text
-app
-│ └le
-├mazon
-│  └ing
-└lready
-fix
- └nd
-```
-
-_Note, if the trie contains the empty string then the first line will be blank:_
-```text
-
-app
-│ └le
-├mazon
-│  └ing
-└lready
-fix
- └nd
-```
 
 ### Clear
 
@@ -162,6 +144,8 @@ To set `-w`, `--word` or `--prefix` to be the empty string, do the following:
 trie add --word ""
 ```
 
+If the empty string is in the trie, the first line the output of
+`trie display` will be blank.
 
 ### Strings with spaces
 

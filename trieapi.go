@@ -19,47 +19,48 @@ var mutex sync.Mutex
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
-	// operations when keyword == ""
+	// operations when word == ""
 	router.HandleFunc("/api/v1/add/", addHandler)
 	router.HandleFunc("/api/v1/delete/", deleteHandler)
 	router.HandleFunc("/api/v1/complete/", completeHandler)
 	router.HandleFunc("/api/v1/search/", searchHandler)
 
-	// operations when keyword != ""
-	router.HandleFunc("/api/v1/add/{keyword}", addHandler)
-	router.HandleFunc("/api/v1/delete/{keyword}", deleteHandler)
-	router.HandleFunc("/api/v1/complete/{keyword}", completeHandler)
-	router.HandleFunc("/api/v1/search/{keyword}", searchHandler)
+	// operations when word != ""
+	router.HandleFunc("/api/v1/add/{word}", addHandler)
+	router.HandleFunc("/api/v1/delete/{word}", deleteHandler)
+	router.HandleFunc("/api/v1/complete/{word}", completeHandler)
+	router.HandleFunc("/api/v1/search/{word}", searchHandler)
 
-	// operations without keyword
+	// operations without word
 	router.HandleFunc("/api/v1/display", displayHandler)
+	router.HandleFunc("/api/v1/clear", clearHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = ":8080"
 	} else {
-		port = ":" + port // todo might not work
+		port = ":" + port
 	}
 	log.Printf("See http://localhost%s/api/v1/", port)
 	log.Fatal(http.ListenAndServe(port, router))
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
-	keyword, ok := mux.Vars(r)["keyword"]
+	word, ok := mux.Vars(r)["word"]
 	if !ok {
-		keyword = ""
+		word = ""
 	}
 	mutex.Lock()
-	modified := trie.Add(keyword)
+	modified := trie.Add(word)
 	mutex.Unlock()
 	if modified {
-		_, err := fmt.Fprintf(w, "Keyword (%s) added", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) added", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) present", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) present", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -68,21 +69,21 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteHandler(w http.ResponseWriter, r *http.Request) {
-	keyword, ok := mux.Vars(r)["keyword"]
+	word, ok := mux.Vars(r)["word"]
 	if !ok {
-		keyword = ""
+		word = ""
 	}
 	mutex.Lock()
-	deleted := trie.Delete(keyword)
+	deleted := trie.Delete(word)
 	mutex.Unlock()
 	if deleted {
-		_, err := fmt.Fprintf(w, "Keyword (%s) deleted", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) deleted", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) missing", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) missing", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -91,21 +92,21 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
-	keyword, ok := mux.Vars(r)["keyword"]
+	word, ok := mux.Vars(r)["word"]
 	if !ok {
-		keyword = ""
+		word = ""
 	}
 	mutex.Lock()
-	found := trie.Search(keyword)
+	found := trie.Search(word)
 	mutex.Unlock()
 	if found {
-		_, err := fmt.Fprintf(w, "Keyword (%s) found", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) found", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) not found", keyword)
+		_, err := fmt.Fprintf(w, "Keyword (%s) not found", word)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -114,14 +115,14 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func completeHandler(w http.ResponseWriter, r *http.Request) {
-	keyword, ok := mux.Vars(r)["keyword"]
+	word, ok := mux.Vars(r)["word"]
 	if !ok {
-		keyword = ""
+		word = ""
 	}
 	mutex.Lock()
-	words := trie.Complete(keyword)
+	words := trie.Complete(word)
 	mutex.Unlock()
-	_, err := fmt.Fprintf(w, "Keyword (%s) found", strings.Join(words, "\n"))
+	_, err := fmt.Fprint(w, strings.Join(words, "\n"))
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -136,4 +137,10 @@ func displayHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+}
+
+func clearHandler(w http.ResponseWriter, r *http.Request) {
+	mutex.Lock()
+	trie.Clear()
+	mutex.Unlock()
 }
