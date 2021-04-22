@@ -12,16 +12,16 @@ func (root *Node) Delete(word string) bool {
 		}
 		path = append(path, cur)
 	}
-	if !cur.terminal {
+	if !cur.term {
 		return false
 	}
 	runes := []rune(word)
 	for i := len(path) - 2; i >= 0; i-- {
-		if path[i+1].terminal || len(path[i+1].children) > 0 {
+		if path[i+1].term || len(path[i+1].children) > 0 {
 			break
 		}
 		delete(path[i].children, runes[i])
 	}
-	cur.terminal = false
+	cur.term = false
 	return true
 }

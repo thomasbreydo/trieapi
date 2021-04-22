@@ -4,7 +4,7 @@ import "testing"
 
 func TestNew(t *testing.T) {
 	trie := New()
-	if trie.terminal {
+	if trie.term {
 		t.Error("New().terminal is (true) and not (false)")
 	}
 	if len(trie.children) != 0 {

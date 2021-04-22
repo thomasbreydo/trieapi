@@ -19,5 +19,5 @@ func (root *Node) Search(word string) bool {
 	if prefixRoot == nil {
 		return false
 	}
-	return prefixRoot.terminal
+	return prefixRoot.term
 }

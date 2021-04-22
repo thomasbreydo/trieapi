@@ -13,7 +13,7 @@ func TestAdd(t *testing.T) {
 	var ok bool
 	var cur *Node
 	cur = trie
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -23,7 +23,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain Ӝ")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -33,7 +33,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -43,7 +43,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 0 {
@@ -55,7 +55,7 @@ func TestAdd(t *testing.T) {
 	}
 	// trie contains: Ӝ∮∮, Ӝ∮
 	cur = trie
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -65,7 +65,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain Ӝ")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -75,7 +75,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -85,7 +85,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 0 {
@@ -97,7 +97,7 @@ func TestAdd(t *testing.T) {
 	}
 	// trie contains: Ӝ∮∮, <empty string>, Ӝ∮
 	cur = trie
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -107,7 +107,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain Ӝ")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -117,7 +117,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -127,7 +127,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 0 {
@@ -139,7 +139,7 @@ func TestAdd(t *testing.T) {
 	}
 	// trie contains: Ӝ∮∮, <empty string>, Ӝ∮
 	cur = trie
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -149,7 +149,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain Ӝ")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 1 {
@@ -159,7 +159,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -169,7 +169,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 0 {
@@ -181,7 +181,7 @@ func TestAdd(t *testing.T) {
 	}
 	// trie contains: Ӝ∮∮, <empty string>, Ӝ∮, Ӝ<newline>8
 	cur = trie
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -191,7 +191,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain Ӝ")
 	}
-	if cur.terminal {
+	if cur.term {
 		t.Error("cur.terminal is (true) and not (false)")
 	}
 	if len(cur.children) != 2 {
@@ -205,7 +205,7 @@ func TestAdd(t *testing.T) {
 		if len(branch.children) != 1 {
 			t.Errorf("branch.children has length %d and not 1", len(branch.children))
 		}
-		if branch.terminal {
+		if branch.term {
 			t.Error("branch.terminal is (true) and not (false)")
 		}
 		branch, branchok = branch.children['8']
@@ -215,7 +215,7 @@ func TestAdd(t *testing.T) {
 		if len(branch.children) != 0 {
 			t.Errorf("branch.children has length %d and not 0", len(branch.children))
 		}
-		if !branch.terminal {
+		if !branch.term {
 			t.Error("branch.terminal is (false) and not (true)")
 		}
 	}
@@ -223,7 +223,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 1 {
@@ -233,7 +233,7 @@ func TestAdd(t *testing.T) {
 	if !ok {
 		t.Error("cur.children doesn't contain ∮")
 	}
-	if !cur.terminal {
+	if !cur.term {
 		t.Error("cur.terminal is (false) and not (true)")
 	}
 	if len(cur.children) != 0 {

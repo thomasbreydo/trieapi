@@ -1,6 +1,6 @@
 package tries
 
-// Add adds a keyword to the to a trie and returns true if the trie was modified
+// Add adds a word to the to a trie and returns true if the trie was modified
 func (root *Node) Add(word string) bool {
 	cur := root
 	var next *Node
@@ -15,9 +15,9 @@ func (root *Node) Add(word string) bool {
 		}
 		cur = next
 	}
-	if !cur.terminal {
+	if !cur.term {
 		modified = true
 	}
-	cur.terminal = true
+	cur.term = true
 	return modified
 }

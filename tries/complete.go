@@ -3,7 +3,7 @@ package tries
 // allWords returns a slice of all words in a trie.
 func allWords(root *Node) []string {
 	var words []string
-	if root.terminal {
+	if root.term {
 		words = []string{""}
 	} else {
 		words = make([]string, 0)
