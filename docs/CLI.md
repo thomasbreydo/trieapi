@@ -1,4 +1,4 @@
-## Overview
+## CLI Overview
 
 The trie system comes with a command-line interface that can:
 
