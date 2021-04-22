@@ -1,1 +1,4 @@
 runtime: go115
+
+manual_scaling:
+  instances: 1
