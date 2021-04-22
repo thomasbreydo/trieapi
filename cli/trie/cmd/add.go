@@ -9,8 +9,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var word string
-
 var Add = &cobra.Command{
 	Use:               "add",
 	Short:             "Add a keyword to the trie",
@@ -19,7 +17,7 @@ var Add = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api2.WithWord("add", word)
+		res, code, err := api2.WithWord("add", input)
 		if err != nil {
 			return err
 		}
@@ -32,6 +30,6 @@ var Add = &cobra.Command{
 }
 
 func init() {
-	Add.Flags().StringVarP(&word, "word", "w", "", "word to add")
+	Add.Flags().StringVarP(&input, "word", "w", "", "word to add")
 	_ = Add.MarkFlagRequired("word")
 }
