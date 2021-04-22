@@ -16,7 +16,7 @@ var Complete = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("complete", input)
+		res, code, err := api.WithWord("complete", inp)
 		if err != nil {
 			return err
 		}
@@ -29,6 +29,6 @@ var Complete = &cobra.Command{
 }
 
 func init() {
-	Complete.Flags().StringVarP(&input, "prefix", "p", "", "prefix to complete")
+	Complete.Flags().StringVarP(&inp, "prefix", "p", "", "prefix to complete")
 	_ = Complete.MarkFlagRequired("prefix")
 }

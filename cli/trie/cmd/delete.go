@@ -16,7 +16,7 @@ var Delete = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("delete", input)
+		res, code, err := api.WithWord("delete", inp)
 		if err != nil {
 			return err
 		}
@@ -29,6 +29,6 @@ var Delete = &cobra.Command{
 }
 
 func init() {
-	Delete.Flags().StringVarP(&input, "word", "w", "", "word to delete")
+	Delete.Flags().StringVarP(&inp, "word", "w", "", "word to delete")
 	_ = Delete.MarkFlagRequired("word")
 }

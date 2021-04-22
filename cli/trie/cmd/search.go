@@ -16,7 +16,7 @@ var Search = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("search", input)
+		res, code, err := api.WithWord("search", inp)
 		if err != nil {
 			return err
 		}
@@ -29,6 +29,6 @@ var Search = &cobra.Command{
 }
 
 func init() {
-	Search.Flags().StringVarP(&input, "word", "w", "", "word to search for")
+	Search.Flags().StringVarP(&inp, "word", "w", "", "word to search for")
 	_ = Search.MarkFlagRequired("word")
 }

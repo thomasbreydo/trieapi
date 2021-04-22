@@ -1,3 +1,3 @@
 package cmd
 
-var input string
+var inp string
