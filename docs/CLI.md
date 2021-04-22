@@ -52,7 +52,7 @@ To add a keyword to the trie, use `add`:
 trie add "<keyword>"
 ```
 
-If the keyword is already in the trie, the CLI outputs `Keyword (<keyword) present`. 
+If the keyword is already in the trie, the CLI outputs `Keyword (<keyword>) present`. 
 Otherwise, it outputs `Keyword (<keyword>) added`.
 
 ### Delete
@@ -64,7 +64,7 @@ trie delete "<keyword>"
 ```
 
 If the keyword isn't in the trie, the CLI outputs `Keyword (<keyword>) missing`.
-Otherwise, it outputs `Keyword (<keyword) deleted`.
+Otherwise, it outputs `Keyword (<keyword>) deleted`.
 
 ### Search
 
