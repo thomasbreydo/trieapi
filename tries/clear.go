@@ -1,6 +1,6 @@
 package tries
 
-func (root *Node) Clear() {
-	root.term = false
-	root.children = make(map[rune]*Node)
+func (n *Node) Clear() {
+	n.term = false
+	n.children = make(map[rune]*Node)
 }

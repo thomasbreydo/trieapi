@@ -1,8 +1,8 @@
 package tries
 
 // Add adds a word to the to a trie and returns true if the trie was modified
-func (root *Node) Add(word string) bool {
-	cur := root
+func (n *Node) Add(word string) bool {
+	cur := n
 	var next *Node
 	var found bool
 	mod := false

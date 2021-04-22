@@ -1,7 +1,7 @@
 package tries
 
-// rootOfPrefix finds the root of the subtrie of words that start with a prefix.
-func rootOfPrefix(prefix string, root *Node) *Node {
+// prefRoot finds the root of the subtrie of words that start with a prefix.
+func prefRoot(prefix string, root *Node) *Node {
 	cur := root
 	var found bool
 	for _, r := range prefix {
@@ -14,8 +14,8 @@ func rootOfPrefix(prefix string, root *Node) *Node {
 }
 
 // Search checks if a word is in a trie.
-func (root *Node) Search(word string) bool {
-	prefixRoot := rootOfPrefix(word, root)
+func (n *Node) Search(word string) bool {
+	prefixRoot := prefRoot(word, n)
 	if prefixRoot == nil {
 		return false
 	}

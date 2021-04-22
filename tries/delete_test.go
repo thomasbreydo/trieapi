@@ -26,51 +26,51 @@ func TestDelete(t *testing.T) {
 	trie.Add("hello")
 	trie.Add("hellooӜ")
 	trie.Add("hellooy")
-	checkEq([]string{"hello", "hellooӜ", "hellooy"}, allWords(trie), t)
+	checkEq([]string{"hello", "hellooӜ", "hellooy"}, trie.AllWords(), t)
 	if trie.Delete("") {
 		t.Error("trie.Delete is (true) and not (false)")
 	}
-	checkEq([]string{"hello", "hellooӜ", "hellooy"}, allWords(trie), t)
+	checkEq([]string{"hello", "hellooӜ", "hellooy"}, trie.AllWords(), t)
 	if trie.Delete("hi") {
 		t.Error("trie.Delete is (true) and not (false)")
 	}
-	checkEq([]string{"hello", "hellooӜ", "hellooy"}, allWords(trie), t)
+	checkEq([]string{"hello", "hellooӜ", "hellooy"}, trie.AllWords(), t)
 	if !trie.Delete("hello") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"hellooӜ", "hellooy"}, allWords(trie), t)
+	checkEq([]string{"hellooӜ", "hellooy"}, trie.AllWords(), t)
 	trie.Add("fix")
 	if !trie.Delete("hellooӜ") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"hellooy", "fix"}, trie.AllWords(), t)
 	if trie.Delete("") {
 		t.Error("trie.Delete is (true) and not (false)")
 	}
 	trie.Add("")
-	checkEq([]string{"", "hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"", "hellooy", "fix"}, trie.AllWords(), t)
 	trie.Add("h")
-	checkEq([]string{"", "h", "hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"", "h", "hellooy", "fix"}, trie.AllWords(), t)
 	if !trie.Delete("h") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"", "hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"", "hellooy", "fix"}, trie.AllWords(), t)
 	trie.Add("h")
-	checkEq([]string{"", "h", "hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"", "h", "hellooy", "fix"}, trie.AllWords(), t)
 	if !trie.Delete("") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"h", "hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"h", "hellooy", "fix"}, trie.AllWords(), t)
 	if !trie.Delete("h") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"hellooy", "fix"}, allWords(trie), t)
+	checkEq([]string{"hellooy", "fix"}, trie.AllWords(), t)
 	if !trie.Delete("fix") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{"hellooy"}, allWords(trie), t)
+	checkEq([]string{"hellooy"}, trie.AllWords(), t)
 	if !trie.Delete("hellooy") {
 		t.Error("trie.Delete is (false) and not (true)")
 	}
-	checkEq([]string{}, allWords(trie), t)
+	checkEq([]string{}, trie.AllWords(), t)
 }

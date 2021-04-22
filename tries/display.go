@@ -2,6 +2,6 @@ package tries
 
 import "strings"
 
-func (root *Node) String() string {
-	return strings.Join(allWords(root), "\n")
+func (n *Node) String() string {
+	return strings.Join(n.AllWords(), "\n")
 }

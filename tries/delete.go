@@ -1,10 +1,10 @@
 package tries
 
 // Delete removes a word from a trie and returns true if the trie was modified
-func (root *Node) Delete(word string) bool {
-	cur := root
+func (n *Node) Delete(word string) bool {
+	cur := n
 	var found bool
-	path := []*Node{root}
+	path := []*Node{n}
 	for _, r := range word {
 		cur, found = cur.children[r]
 		if !found {

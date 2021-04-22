@@ -1,15 +1,15 @@
 package tries
 
-// allWords returns a slice of all words in a trie.
-func allWords(root *Node) []string {
+// AllWords returns a slice of all words in a trie.
+func (n *Node) AllWords() []string {
 	var words []string
-	if root.term {
+	if n.term {
 		words = []string{""}
 	} else {
 		words = make([]string, 0)
 	}
-	for r, node := range root.children {
-		for _, word := range allWords(node) {
+	for r, node := range n.children {
+		for _, word := range node.AllWords() {
 			words = append(words, string(r)+word)
 		}
 	}
@@ -17,14 +17,14 @@ func allWords(root *Node) []string {
 }
 
 // Complete returns a slice of all words in a trie with a given prefix.
-func (root *Node) Complete(prefix string) []string {
-	prefixRoot := rootOfPrefix(prefix, root)
-	if prefixRoot == nil {
+func (n *Node) Complete(pref string) []string {
+	p := prefRoot(pref, n)
+	if p == nil {
 		return make([]string, 0)
 	}
-	words := allWords(prefixRoot)
+	words := p.AllWords()
 	for i, s := range words {
-		words[i] = prefix + s
+		words[i] = pref + s
 	}
 	return words
 }
