@@ -4,7 +4,7 @@ The trie system comes with a command-line interface that can:
 
 1. [Add a keyword to the trie](#add)
 
-2. [Delete a keywords from the trie](#delete)
+2. [Delete keywords from the trie](#delete)
 
 3. [Search for a keyword in trie](#search)
 
@@ -24,7 +24,7 @@ Prerequisites:
 
 To install the CLI, run the following:
 
-```shell
+```text
 go get -u github.com/thomasbreydo/trieapi/cli/trie
 ```
 
@@ -34,7 +34,7 @@ You can use the CLI to do any of the following:
 
 1. [Add a keyword to the trie](#add)
 
-2. [Delete a keywords from the trie](#delete)
+2. [Delete keywords from the trie](#delete)
 
 3. [Search for a keyword in trie](#search)
 
@@ -48,8 +48,14 @@ You can use the CLI to do any of the following:
 
 To add a keyword to the trie, use `add`:
 
-```shell
-trie add "<keyword>"
+```text
+trie add --word <keyword>
+```
+
+or
+
+```text
+trie add -w <keyword>
 ```
 
 If the keyword is already in the trie, the CLI outputs `Keyword (<keyword>) present`. 
@@ -59,8 +65,14 @@ Otherwise, it outputs `Keyword (<keyword>) added`.
 
 To delete a keyword from the trie, use `delete`:
 
-```shell
-trie delete "<keyword>"
+```text
+trie delete --word <keyword>
+```
+
+or
+
+```text
+trie delete -w <keyword>
 ```
 
 If the keyword isn't in the trie, the CLI outputs `Keyword (<keyword>) missing`.
@@ -70,8 +82,14 @@ Otherwise, it outputs `Keyword (<keyword>) deleted`.
 
 To search if a keyword is present in the trie, use `search`:
 
-```shell
-trie search "<keyword>"
+```text
+trie search --word <keyword>
+```
+
+or
+
+```text
+trie search -w <keyword>
 ```
 
 If the keyword is in the trie, the CLI outputs `Keyword (<keyword>) found`. Otherwise, 
@@ -79,25 +97,31 @@ it outputs `Keyword (<keyword>) not found`.
 
 ### Complete
 
-To get all words in the trie that start with a prefix, use `complete`:
+To get all keywords in the trie that start with a prefix, use `complete`:
 
-```shell
-trie complete "<prefix>"
+```text
+trie complete --word <prefix>
 ```
 
-The CLI outputs a newline-separated list of words.
+or
 
-_Note, if no words are found, the command's exit status is set to `1`._
+```text
+trie complete -w <prefix>
+```
+
+The CLI outputs a newline-separated list of keywords.
+
+_Note, if no keywords are found, the command's exit status is set to `1`._
 
 ### Display
 
 To display the trie, use `display`:
 
-```shell
+```text
 trie display
 ```
 
-For example, here is what a trie with the words `app, apple, amazon, amazing, already, fix, find` might look like:
+For example, here is what a trie with the keywords `app, apple, amazon, amazing, already, fix, find` might look like:
 ```text
 app
 │ └le
@@ -122,8 +146,33 @@ fix
 
 ### Clear
 
-To delete all words from the trie, use `clear`:
+To delete all keywords from the trie, use `clear`:
 
-```shell
+```text
 trie clear
 ```
+
+## Edge cases
+
+### The empty string
+
+To set `-w`, `--word` or `--prefix` to be the empty string, do the following:
+
+```text
+trie add --word ""
+```
+
+
+### Strings with spaces
+
+When using the shell, spaces must be escaped. For example, 
+if you want `-w`, `--word` or `--prefix` to be `a b'`, you must
+do the following:
+
+```text
+trie add -word "a b'"
+```
+
+### Strings with non-ASCII characters
+
+The CLI URL-encodes all keywords to ensure Unicode compatibility.
