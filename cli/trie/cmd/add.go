@@ -24,9 +24,9 @@ var Add = &cobra.Command{
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
 		if mod {
-			fmt.Printf("Keyword (%s) added", inp)
+			cmd.Printf("Keyword (%s) added", inp)
 		} else {
-			fmt.Printf("Keyword (%s) present", inp)
+			cmd.Printf("Keyword (%s) present", inp)
 		}
 		return nil
 	},

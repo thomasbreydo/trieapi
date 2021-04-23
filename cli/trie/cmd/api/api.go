@@ -123,7 +123,7 @@ func Display() (string, int, error) {
 }
 
 func Search(w string) (bool, int, error) {
-	dat, code, err := withWord("search", "w")
+	dat, code, err := withWord("search", w)
 	if err != nil {
 		return false, code, err
 	}

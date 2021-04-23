@@ -24,9 +24,9 @@ var Search = &cobra.Command{
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
 		if found {
-			fmt.Printf("Keyword (%s) found", inp)
+			cmd.Printf("Keyword (%s) found", inp)
 		} else {
-			fmt.Printf("Keyword (%s) not found", inp)
+			cmd.Printf("Keyword (%s) not found", inp)
 		}
 		return nil
 	},

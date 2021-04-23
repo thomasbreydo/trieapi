@@ -10,6 +10,11 @@ var Root = &cobra.Command{
 	DisableAutoGenTag: true,
 }
 
+func Reset() {
+	inp = ""
+	json = false
+}
+
 func init() {
 	Root.AddCommand(Add)
 	Root.AddCommand(Clear)

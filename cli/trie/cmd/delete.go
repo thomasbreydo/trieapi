@@ -24,9 +24,9 @@ var Delete = &cobra.Command{
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
 		if mod {
-			fmt.Printf("Keyword (%s) deleted", inp)
+			cmd.Printf("Keyword (%s) deleted", inp)
 		} else {
-			fmt.Printf("Keyword (%s) missing", inp)
+			cmd.Printf("Keyword (%s) missing", inp)
 		}
 		return nil
 	},

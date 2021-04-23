@@ -31,7 +31,7 @@ var Complete = &cobra.Command{
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		fmt.Print(comps)
+		cmd.Print(comps)
 		return nil
 	},
 }
