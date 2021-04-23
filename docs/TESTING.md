@@ -12,11 +12,11 @@ To run all tests, run `./test.sh` from main directory.
 
 ### Server and Global State Tests
 
-The server is implemented in [../server.go]() so the testing
-suite is lives in [../server_test.go]()
+The server is implemented in [../server.go](../server.go) so the testing
+suite is lives in [../server_test.go](../server_test.go)
 
 ### Trie Data Structure Tests
 
-The trie data structure is implemented in [../tries/]() and
+The trie data structure is implemented in [../tries/](../tries) and
 unit tests are in files that follow the naming scheme
 `<name>_test.go`.

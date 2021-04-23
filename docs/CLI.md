@@ -82,7 +82,7 @@ Otherwise, it outputs `Keyword (<keyword>) deleted`.
 
 ### Search
 
-To search if a keyword is present in the trie, use `search`:
+To check if a keyword is present in the trie, use `search`:
 
 ```text
 trie search --word <keyword>
@@ -157,11 +157,13 @@ Output:
 
 ### The empty string
 
-To set `-w`, `--word` or `--prefix` to be the empty string, do the following:
+To set `--word` to be the empty string, do the following:
 
 ```text
-trie add --word ""
+trie <add/delete/search> --word ""
 ```
+
+This also works for `-w` and `--prefix`.
 
 If the empty string is in the trie, the first line the output of
 `trie display` will be blank.

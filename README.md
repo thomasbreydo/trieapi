@@ -6,12 +6,12 @@ This repository contains
 
 - A unicode-safe implementation of the trie data structure
 
-- A concurrent API server (see [docs/SERVER.md]())
+- A concurrent API server (see [docs/SERVER.md](docs/SERVER.md))
 
-- A CLI to access the API (see [docs/CLI.md]())
+- A CLI to access the API (see [docs/CLI.md](docs/CLI.md))
 
 - Unit tests that are automatically run by Travis CI
-  (see [docs/TESTING.md]())
+  (see [docs/TESTING.md](docs/TESTING.md))
 
 ## Repository structure
 
@@ -31,7 +31,9 @@ This repository contains
     
   - [Testing README](docs/TESTING.md)
 
-- [`trieapi.go`](trieapi.go): server source code
+- [`server.go`](server.go): server source code
+  
+- [`server_test.go`](server_test.go): local server tests
 
 - `*.sh`: convenience scripts
 

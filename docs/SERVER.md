@@ -75,7 +75,7 @@ or
 {"modified":false}
 ```
 depending on whether the trie was modified. (If it wasn't,
-the word was not in the trie.)
+the word wasn't in the trie.)
 
 #### To search for a word:
 
