@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -14,7 +15,7 @@ var URL = "https://trieapi.uk.r.appspot.com/api/v1" // no trailing slash
 func withWord(cmd, w string) ([]byte, int, error) {
 	res, err := http.Get(fmt.Sprintf("%s/%s/%s", URL, cmd, w))
 	if err != nil {
-		return nil, 0, err
+		return nil, 0, errors.New("couldn't connect to API, check internet")
 	}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
