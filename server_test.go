@@ -21,7 +21,7 @@ func check(desired string, buf *bytes.Buffer, t *testing.T) {
 }
 
 func TestServer(t *testing.T) {
-	go main()
+	go main() // serve locally for testing purposes
 	api.URL = "http://localhost:8080/api/v1"
 	buf := bytes.NewBuffer(nil)
 	cmd.Reset()
