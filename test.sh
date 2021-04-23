@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-go test ./tries
+go test -v ./...

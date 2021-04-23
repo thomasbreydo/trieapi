@@ -34,11 +34,11 @@ func noWord(cmd string) ([]byte, int, error) {
 }
 
 type foundInfo struct {
-	found bool
+	Found bool `json:"found"`
 }
 
 type modInfo struct {
-	modified bool
+	Mod bool `json:"modified"`
 }
 
 func Add(w string) (bool, int, error) {
@@ -51,7 +51,7 @@ func Add(w string) (bool, int, error) {
 	if err != nil {
 		return false, code, err
 	}
-	return info.modified, code, nil
+	return info.Mod, code, nil
 }
 
 func Clear() (bool, int, error) {
@@ -64,7 +64,7 @@ func Clear() (bool, int, error) {
 	if err != nil {
 		return false, code, err
 	}
-	return info.modified, code, nil
+	return info.Mod, code, nil
 }
 
 func CompleteJSON(w string) (string, int, error) {
@@ -98,7 +98,7 @@ func Delete(w string) (bool, int, error) {
 	if err != nil {
 		return false, code, err
 	}
-	return info.modified, code, nil
+	return info.Mod, code, nil
 }
 
 func DisplayJSON() (string, int, error) {
@@ -132,5 +132,5 @@ func Search(w string) (bool, int, error) {
 	if err != nil {
 		return false, code, err
 	}
-	return info.found, code, nil
+	return info.Found, code, nil
 }
