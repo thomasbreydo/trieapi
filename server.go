@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
 	"sync"
 
 	"github.com/gorilla/mux"
@@ -33,14 +32,7 @@ func main() {
 	router.HandleFunc("/api/v1/display", displayHandler)
 	router.HandleFunc("/api/v1/clear", clearHandler)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = ":8080"
-	} else {
-		port = ":" + port
-	}
-	log.Printf("See http://localhost%s/api/v1/", port)
-	log.Fatal(http.ListenAndServe(port, router))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
