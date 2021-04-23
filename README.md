@@ -21,7 +21,7 @@ This repository contains
   
   - Unit tests in files called `<name>_test.go`
 
-- [`cli/`](cli): Go subpackage that implements the CLI
+- [`cli/trie/`](cli/trie): Go subpackage that implements the CLI
 
 - [`docs/`](docs): Documentation folder
 
