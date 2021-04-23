@@ -23,10 +23,10 @@ var Add = &cobra.Command{
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		if mod { // modified because not found
-			fmt.Printf("Keyword (%s) not found", inp)
+		if mod {
+			fmt.Printf("Keyword (%s) added", inp)
 		} else {
-			fmt.Printf("Keyword (%s) found", inp)
+			fmt.Printf("Keyword (%s) present", inp)
 		}
 		return nil
 	},

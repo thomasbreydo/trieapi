@@ -67,8 +67,12 @@ func Clear() (bool, int, error) {
 	return info.modified, code, nil
 }
 
-func CompleteJSON(w string) ([]byte, int, error) {
-	return withWord("complete", w)
+func CompleteJSON(w string) (string, int, error) {
+	comps, code, err := withWord("complete", w)
+	if err != nil {
+		return "", 0, err
+	}
+	return string(comps), code, nil
 }
 
 func Complete(w string) (string, int, error) {
@@ -97,8 +101,12 @@ func Delete(w string) (bool, int, error) {
 	return info.modified, code, nil
 }
 
-func DisplayJSON() ([]byte, int, error) {
-	return noWord("display")
+func DisplayJSON() (string, int, error) {
+	words, code, err := noWord("display")
+	if err != nil {
+		return "", 0, err
+	}
+	return string(words), code, err
 }
 
 func Display() (string, int, error) {

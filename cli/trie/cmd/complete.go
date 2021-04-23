@@ -17,25 +17,21 @@ var Complete = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		var comps string
+		var code int
+		var err error
 		if json {
-			comps, code, err := api.CompleteJSON(inp)
-			if err != nil {
-				return err
-			}
-			if code < 200 || code >= 300 {
-				return errors.New(fmt.Sprintf("status code %d", code))
-			}
-			fmt.Print(comps)
+			comps, code, err = api.CompleteJSON(inp)
 		} else {
-			comps, code, err := api.Complete(inp)
-			if err != nil {
-				return err
-			}
-			if code < 200 || code >= 300 {
-				return errors.New(fmt.Sprintf("status code %d", code))
-			}
-			fmt.Print(comps)
+			comps, code, err = api.Complete(inp)
 		}
+		if err != nil {
+			return err
+		}
+		if code < 200 || code >= 300 {
+			return errors.New(fmt.Sprintf("status code %d", code))
+		}
+		fmt.Print(comps)
 		return nil
 	},
 }
