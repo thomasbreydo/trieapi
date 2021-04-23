@@ -1,6 +1,4 @@
 runtime: go115
 
-instance_class:
-  F1
-#manual_scaling:
-#  instances: 1
+manual_scaling:
+  instances: 1
