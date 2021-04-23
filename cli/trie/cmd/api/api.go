@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-const URL = "https://trieapi.uk.r.appspot.com/api/v1" // no trailing slash
+var URL = "https://trieapi.uk.r.appspot.com/api/v1" // no trailing slash
 
 // withWord gets https://[api.com]/cmd/word
 func withWord(cmd, w string) ([]byte, int, error) {
