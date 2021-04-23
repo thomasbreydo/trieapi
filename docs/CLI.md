@@ -181,3 +181,7 @@ trie add -word "a b'"
 ### Strings with non-ASCII characters
 
 The CLI URL-encodes all keywords to ensure Unicode compatibility.
+
+## Auto-generated CLI Reference
+
+See [auto/trie.md](auto/trie.md) for an auto-generated CLI reference.
