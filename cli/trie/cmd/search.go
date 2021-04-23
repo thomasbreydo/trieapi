@@ -16,14 +16,18 @@ var Search = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("search", inp)
+		found, code, err := api.Search(inp)
 		if err != nil {
 			return err
 		}
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		fmt.Print(res)
+		if found {
+			fmt.Printf("Keyword (%s) found", inp)
+		} else {
+			fmt.Printf("Keyword (%s) not found", inp)
+		}
 		return nil
 	},
 }

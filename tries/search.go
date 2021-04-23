@@ -14,8 +14,8 @@ func prefRoot(prefix string, root *Node) *Node {
 }
 
 // Search checks if a word is in a trie.
-func (n *Node) Search(word string) bool {
-	prefixRoot := prefRoot(word, n)
+func (n *Node) Search(w string) bool {
+	prefixRoot := prefRoot(w, n)
 	if prefixRoot == nil {
 		return false
 	}

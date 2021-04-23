@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
-	"strings"
 	"sync"
 
 	"github.com/gorilla/mux"
@@ -50,20 +49,18 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 		word = ""
 	}
 	mutex.Lock()
-	add := trie.Add(word)
+	mod := trie.Add(word)
 	mutex.Unlock()
-	if add {
-		_, err := fmt.Fprintf(w, "Keyword (%s) added", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) present", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(map[string]bool{"modified": mod})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -73,20 +70,18 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 		word = ""
 	}
 	mutex.Lock()
-	del := trie.Delete(word)
+	mod := trie.Delete(word)
 	mutex.Unlock()
-	if del {
-		_, err := fmt.Fprintf(w, "Keyword (%s) deleted", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) missing", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(map[string]bool{"modified": mod})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -98,18 +93,16 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
 	found := trie.Search(word)
 	mutex.Unlock()
-	if found {
-		_, err := fmt.Fprintf(w, "Keyword (%s) found", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-	} else {
-		_, err := fmt.Fprintf(w, "Keyword (%s) not found", word)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(map[string]bool{"found": found})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -121,25 +114,49 @@ func completeHandler(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
 	words := trie.Complete(word)
 	mutex.Unlock()
-	_, err := fmt.Fprint(w, strings.Join(words, "\n"))
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(words)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
 func displayHandler(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
-	_, err := fmt.Fprint(w, trie)
+	words := trie.AllWords()
 	mutex.Unlock()
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(words)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
 func clearHandler(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
-	trie.Clear()
+	mod := trie.Clear()
 	mutex.Unlock()
+	w.Header().Set("Content-Type", "application/json")
+	out, err := json.Marshal(map[string]bool{"modified": mod})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	_, err = w.Write(out)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }

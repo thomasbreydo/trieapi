@@ -16,14 +16,29 @@ var Display = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithoutWord("display")
-		if err != nil {
-			return err
+		if json {
+			ww, code, err := api.DisplayJSON()
+			if err != nil {
+				return err
+			}
+			if code < 200 || code >= 300 {
+				return errors.New(fmt.Sprintf("status code %d", code))
+			}
+			fmt.Print(ww)
+		} else {
+			ww, code, err := api.Display()
+			if err != nil {
+				return err
+			}
+			if code < 200 || code >= 300 {
+				return errors.New(fmt.Sprintf("status code %d", code))
+			}
+			fmt.Print(ww)
 		}
-		if code < 200 || code >= 300 {
-			return errors.New(fmt.Sprintf("status code %d", code))
-		}
-		fmt.Print(res)
 		return nil
 	},
+}
+
+func init() {
+	Display.Flags().BoolVar(&json, "json", false, "use JSON output format")
 }

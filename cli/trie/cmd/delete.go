@@ -16,14 +16,18 @@ var Delete = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("delete", inp)
+		mod, code, err := api.Delete(inp)
 		if err != nil {
 			return err
 		}
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		fmt.Print(res)
+		if mod {
+			fmt.Printf("Keyword (%s) deleted", inp)
+		} else {
+			fmt.Printf("Keyword (%s) missing", inp)
+		}
 		return nil
 	},
 }

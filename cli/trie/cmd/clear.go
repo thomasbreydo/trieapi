@@ -4,8 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/thomasbreydo/trieapi/cli/trie/cmd/api"
+
+	"github.com/spf13/cobra"
 )
 
 var Clear = &cobra.Command{
@@ -16,14 +17,18 @@ var Clear = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithoutWord("clear")
+		mod, code, err := api.Clear()
 		if err != nil {
 			return err
 		}
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		fmt.Print(res)
+		if mod {
+			fmt.Print("Cleared")
+		} else {
+			fmt.Print("Already empty")
+		}
 		return nil
 	},
 }

@@ -4,8 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/thomasbreydo/trieapi/cli/trie/cmd/api"
+
+	"github.com/spf13/cobra"
 )
 
 var Complete = &cobra.Command{
@@ -16,14 +17,25 @@ var Complete = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("complete", inp)
-		if err != nil {
-			return err
+		if json {
+			comps, code, err := api.CompleteJSON(inp)
+			if err != nil {
+				return err
+			}
+			if code < 200 || code >= 300 {
+				return errors.New(fmt.Sprintf("status code %d", code))
+			}
+			fmt.Print(comps)
+		} else {
+			comps, code, err := api.Complete(inp)
+			if err != nil {
+				return err
+			}
+			if code < 200 || code >= 300 {
+				return errors.New(fmt.Sprintf("status code %d", code))
+			}
+			fmt.Print(comps)
 		}
-		if code < 200 || code >= 300 {
-			return errors.New(fmt.Sprintf("status code %d", code))
-		}
-		fmt.Print(res)
 		return nil
 	},
 }
@@ -31,4 +43,5 @@ var Complete = &cobra.Command{
 func init() {
 	Complete.Flags().StringVarP(&inp, "prefix", "p", "", "prefix to complete")
 	_ = Complete.MarkFlagRequired("prefix")
+	Complete.Flags().BoolVar(&json, "json", false, "use JSON output format")
 }

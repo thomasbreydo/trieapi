@@ -6,12 +6,18 @@ import (
 
 func TestClear(t *testing.T) {
 	trie := New()
-	trie.Clear()
+	if trie.Clear() {
+		t.Errorf("expected false")
+	}
 	trie.Add("hi")
 	checkEq([]string{"hi"}, trie.AllWords(), t)
-	trie.Clear()
+	if !trie.Clear() {
+		t.Errorf("expected true")
+	}
 	checkEq([]string{}, trie.AllWords(), t)
-	trie.Clear()
+	if trie.Clear() {
+		t.Errorf("expected false")
+	}
 	checkEq([]string{}, trie.AllWords(), t)
 	trie.Add("hi")
 	trie.Add("h")
@@ -19,6 +25,11 @@ func TestClear(t *testing.T) {
 	trie.Add("*")
 	trie.Add("Ш")
 	checkEq([]string{"hi", "h", "", "*", "Ш"}, trie.AllWords(), t)
-	trie.Clear()
+	if !trie.Clear() {
+		t.Errorf("expected true")
+	}
 	checkEq([]string{}, trie.AllWords(), t)
+	if trie.Clear() {
+		t.Errorf("expected false")
+	}
 }

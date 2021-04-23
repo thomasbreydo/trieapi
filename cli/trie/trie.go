@@ -23,6 +23,7 @@ func init() {
 	command.AddCommand(cmd.Delete)
 	command.AddCommand(cmd.Display)
 	command.AddCommand(cmd.Search)
+	command.CompletionOptions.DisableDefaultCmd = true
 }
 
 func main() {

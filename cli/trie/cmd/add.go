@@ -16,14 +16,18 @@ var Add = &cobra.Command{
 	SilenceUsage:      true,
 	DisableAutoGenTag: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, code, err := api.WithWord("add", inp)
+		mod, code, err := api.Add(inp)
 		if err != nil {
 			return err
 		}
 		if code < 200 || code >= 300 {
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
-		fmt.Print(res)
+		if mod { // modified because not found
+			fmt.Printf("Keyword (%s) not found", inp)
+		} else {
+			fmt.Printf("Keyword (%s) found", inp)
+		}
 		return nil
 	},
 }
