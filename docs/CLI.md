@@ -111,9 +111,14 @@ or
 trie complete -p <prefix>
 ```
 
-The CLI outputs a newline-separated list of keywords.
+Output:
 
-_Note, if no keywords are found, the command's exit status is set to `1`._
+- By default, the CLI outputs a newline-separated list keywords
+
+- To output the list in JSON format, use the `--json` flag.
+
+> :warning: If the trie contains whitespace-only entries, you may
+want to use `--json` to avoid ambiguity.
 
 ### Display
 
@@ -122,9 +127,17 @@ To display the trie, use `display`:
 ```text
 trie display
 ```
-The CLI will output a newline-separated list of all words in the tree. _Note: If
-the empty string is in the trie, the first line will be blank._
 
+Output:
+
+- By default, the CLI outputs a newline-separated list of all
+  words in the trie.
+
+- To output the list in JSON format, use the `--json` flag.
+
+
+> :warning: If the trie contains whitespace-only entries, you may
+want to run `--json` to avoid ambiguity.
 
 ### Clear
 
@@ -133,6 +146,12 @@ To delete all keywords from the trie, use `clear`:
 ```text
 trie clear
 ```
+
+Output:
+
+- If the trie is already empty, the CLI outputs `Already empty`.
+
+- Otherwise, it outputs `Trie cleared`.
 
 ## Edge cases
 

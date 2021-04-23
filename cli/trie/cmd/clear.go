@@ -25,7 +25,7 @@ var Clear = &cobra.Command{
 			return errors.New(fmt.Sprintf("status code %d", code))
 		}
 		if mod {
-			cmd.Print("Cleared")
+			cmd.Print("Trie cleared")
 		} else {
 			cmd.Print("Already empty")
 		}
