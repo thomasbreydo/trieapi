@@ -31,14 +31,14 @@ This repository contains
     
   - [Testing README](docs/TESTING.md)
 
-- [`server.go`](server.go): server source code
+- [`server.go`](server.go): Server source code
   
-- [`server_test.go`](server_test.go): local server tests
+- [`server_test.go`](server_test.go): Local server tests
 
-- `*.sh`: convenience scripts
+- `*.sh`: Convenience scripts
 
-  - [`deploy.sh`](deploy.sh): deploy changes to Google Cloud
+  - [`deploy.sh`](deploy.sh): Deploy changes to Google Cloud
   
-  - [`run.sh`](run.sh): get an instance of the API running locally 
+  - [`run.sh`](run.sh): Get an instance of the API running locally 
   
-  - [`test.sh`](test.sh): run all unit tests
+  - [`test.sh`](test.sh): Run all unit tests
