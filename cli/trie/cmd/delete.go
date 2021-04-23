@@ -33,6 +33,6 @@ var Delete = &cobra.Command{
 }
 
 func init() {
-	Delete.Flags().StringVarP(&inp, "word", "w", "", "word to delete")
+	Delete.Flags().StringVarP(&inp, "word", "w", "", "word to delete (required)")
 	_ = Delete.MarkFlagRequired("word")
 }

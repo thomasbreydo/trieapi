@@ -33,6 +33,6 @@ var Search = &cobra.Command{
 }
 
 func init() {
-	Search.Flags().StringVarP(&inp, "word", "w", "", "word to search for")
+	Search.Flags().StringVarP(&inp, "word", "w", "", "word to search for (required)")
 	_ = Search.MarkFlagRequired("word")
 }

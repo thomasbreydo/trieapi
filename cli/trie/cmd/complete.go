@@ -37,7 +37,7 @@ var Complete = &cobra.Command{
 }
 
 func init() {
-	Complete.Flags().StringVarP(&inp, "prefix", "p", "", "prefix to complete")
+	Complete.Flags().StringVarP(&inp, "prefix", "p", "", "prefix to complete (required)")
 	_ = Complete.MarkFlagRequired("prefix")
 	Complete.Flags().BoolVar(&json, "json", false, "use JSON output format")
 }

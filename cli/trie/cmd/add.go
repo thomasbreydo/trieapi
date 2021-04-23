@@ -33,6 +33,6 @@ var Add = &cobra.Command{
 }
 
 func init() {
-	Add.Flags().StringVarP(&inp, "word", "w", "", "word to add")
+	Add.Flags().StringVarP(&inp, "word", "w", "", "word to add (required)")
 	_ = Add.MarkFlagRequired("word")
 }
